@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>_.crimson_shift._ | OS</title>
+</head>
+<body style="background-color:#ffffff; color:#000; font-family:monospace; text-align:center; padding-top:20px; margin:0;">
+
+    <div onclick="window.open('https://gemini.google.com/app', '_blank')" style="cursor:pointer; margin-top:20px; display:inline-block; z-index:999; position:relative;">
+        <svg width="50" height="50" viewBox="0 0 100 100">
+            <polygon points="50,5 61,35 95,35 67,57 78,90 50,70 22,90 33,57 5,35 39,35" fill="#d90429" stroke="#000" stroke-width="3"/>
+        </svg>
+    </div>
+
+    <div id="death-screen" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:#d90429; color:white; z-index:1000; flex-direction:column; justify-content:center; align-items:center;">
+        <h1 style="font-size:100px; margin:0;">-999 AURA</h1>
+        <p style="font-weight:bold; letter-spacing:5px;">SYSTEM_TERMINATED</p>
+        <button onclick="localStorage.clear(); location.reload();" style="margin-top:40px; background:white; border:none; padding:15px 30px; font-family:monospace; font-weight:bold; cursor:pointer;">REBOOT_STREAK</button>
+    </div>
+
+    <h1 style="color:#000; letter-spacing:5px; margin-top:20px;">_.crimson_shift._</h1>
+
+    <div style="margin:20px auto; width:300px;">
+        <div style="font-size:80px; position:relative; display:inline-block;">
+            🔥
+            <div id="streak-val" style="position:absolute; top:55%; left:50%; transform:translate(-50%,-50%); font-weight:900; font-size:25px; color:#fff; text-shadow:2px 2px 0px #000;">0</div>
+        </div>
+        <p style="font-weight:bold; letter-spacing:2px;">HAJMOLA_STREAK</p>
+    </div>
+
+    <div id="ui-box" style="margin-top:20px;">
+        <button onclick="win()" style="background:#fff; border:3px solid #000; color:#000; padding:15px 30px; font-weight:bold; cursor:pointer; font-family:monospace; width:280px;">I_STAYED_UNDER_10G</button>
+        <br><br>
+        <button onclick="fail()" style="background:#fff; border:2px solid #000; color:#000; padding:10px 20px; cursor:pointer; font-family:monospace; width:280px; font-size:10px;">SRY_I_GONE_BEYOND_LIMITS</button>
+    </div>
+
+    <div id="lock-screen" style="display:none; margin-top:10px;">
+        <div style="font-size:40px;">⛓️🔒⛓️</div>
+        <h2 style="color:#000; letter-spacing:2px; margin:10px 0;">SYSTEM_LOCKED</h2>
+        <div id="timer" style="font-size:32px; font-weight:bold; border:3px solid #000; display:inline-block; padding:15px 25px; margin-top:10px; background:#f9f9f9;">24:00:00</div>
+        <p style="color:#666; font-size:11px; margin-top:15px;">AURA_SECURED_FOR_TODAY</p>
+    </div>
+
+    <script>
+        let s = parseInt(localStorage.getItem('cs_s')) || 0;
+        let t = parseInt(localStorage.getItem('cs_t')) || 0;
+        document.getElementById('streak-val').innerText = s;
+
+        if (t !== 0 && (Date.now() - t) > 172800000) {
+            localStorage.clear();
+            location.reload();
+        }
+
+        function win() {
+            localStorage.setItem('cs_s', s + 1);
+            localStorage.setItem('cs_t', Date.now());
+            location.reload();
+        }
+
+        function fail() {
+            if(confirm("ARE YOU SURE TO FINISH")){
+                document.getElementById('death-screen').style.display = 'flex';
+            }
+        }
+
+        function updateTimer() {
+            let now = Date.now();
+            let diff = now - t;
+            let day = 86400000; 
+
+            if (t !== 0 && diff < day) {
+                document.getElementById('ui-box').style.display = 'none';
+                document.getElementById('lock-screen').style.display = 'block';
+
+                let remaining = day - diff;
+                let hrs = Math.floor(remaining / 3600000);
+                let mins = Math.floor((remaining % 3600000) / 60000);
+                let secs = Math.floor((remaining % 60000) / 1000);
+
+                document.getElementById('timer').innerText = 
+                    (hrs < 10 ? "0" + hrs : hrs) + ":" + 
+                    (mins < 10 ? "0" + mins : mins) + ":" + 
+                    (secs < 10 ? "0" + secs : secs);
+            } else {
+                document.getElementById('ui-box').style.display = 'block';
+                document.getElementById('lock-screen').style.display = 'none';
+            }
+        }
+
+        setInterval(updateTimer, 1000);
+        updateTimer();
+    </script>
+</body>
+</html>
