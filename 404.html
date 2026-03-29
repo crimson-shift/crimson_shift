@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>404 | SESSION TERMINATED</title>
+    <style>
+        body { background-color: #000; color: #d90429; font-family: 'Courier New', Courier, monospace; text-align: center; padding-top: 15%; overflow: hidden; }
+        .glitch { font-size: 5rem; font-weight: bold; text-transform: uppercase; position: relative; display: inline-block; }
+        .glitch::before, .glitch::after { content: '404'; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: black; }
+        .glitch::before { left: 2px; text-shadow: -2px 0 #fff; clip: rect(44px, 450px, 56px, 0); animation: glitch-anim 5s infinite linear alternate-reverse; }
+        .glitch::after { left: -2px; text-shadow: -2px 0 #d90429; clip: rect(44px, 450px, 56px, 0); animation: glitch-anim2 5s infinite linear alternate-reverse; }
+        @keyframes glitch-anim { 0% { clip: rect(31px, 9999px, 94px, 0); } 100% { clip: rect(62px, 9999px, 137px, 0); } }
+        @keyframes glitch-anim2 { 0% { clip: rect(65px, 9999px, 100px, 0); } 100% { clip: rect(10px, 9999px, 45px, 0); } }
+        a { color: #fff; text-decoration: none; border: 1px solid #d90429; padding: 10px 20px; transition: 0.3s; }
+        a:hover { background: #d90429; color: black; }
+    </style>
+</head>
+<body>
+    <div class="glitch">404</div>
+    <p>ERROR: DATA_CORRUPTED // LINK_EXPIRED</p>
+    <p>._crimson_shifter._ has moved this asset.</p><br><br>
+    <a href="https://crimson-shift.github.io/crimson_shift/">REBOOT SYSTEM</a>
+</body>
+</html>
